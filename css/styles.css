@@ -54,16 +54,17 @@ h1 {
   left: 0;
   right: 0;
   height: 25%;
-  border-radius: 8px 8px 0 0;
+  clip-path: ellipse(50% 100% at 50% 0%); /* Curvatura en el lado superior */
+  border-radius: 50%;
 }
-
 /* Lado inferior */
 .lado-abajo {
   bottom: 0;
   left: 0;
   right: 0;
   height: 25%;
-  border-radius: 0 0 8px 8px;
+  clip-path: ellipse(50% 100% at 50% 100%); /* Curvatura más pronunciada en el lado inferior */
+  border-radius: 50%;
 }
 
 /* Lado izquierdo */
@@ -72,7 +73,8 @@ h1 {
   bottom: 0;
   left: 0;
   width: 25%;
-  border-radius: 8px 0 0 8px;
+  clip-path: ellipse(80% 50% at 0% 50%); /* Curvatura más pronunciada en el lado izquierdo */
+  border-radius: 50%;
 }
 
 /* Lado derecho */
@@ -81,22 +83,24 @@ h1 {
   bottom: 0;
   right: 0;
   width: 25%;
-  border-radius: 0 8px 8px 0;
+  clip-path: ellipse(80% 50% at 100% 50%); /* Curvatura más pronunciada en el lado derecho */
+  border-radius: 50%;
 }
 
 /* El centro de la pieza dental */
 .centro {
   position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 50%;
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  width: 40%; /* Disminuye el tamaño del centro */
+  height: 40%; /* Disminuye la altura del centro */
   background-color: #fff;
   border: 2px solid #000000;
   border-radius: 50%;
   z-index: 2;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  transform: translate(-50%, -50%); /* Asegura que el centro esté perfectamente centrado */
 }
 
 .centro.seleccionado, .lado.seleccionado {
@@ -118,7 +122,7 @@ button {
   max-width: 200px;
   margin: 30px auto;
   padding: 12px 0;
-  background-color: #4e9f3d;
+  background-color: #3a679b;
   color: white;
   font-size: 16px;
   border: none;
@@ -128,5 +132,15 @@ button {
 }
 
 button:hover {
-  background-color: #3b7f2b;
+  background-color: #e40707;
+}
+/* Logo */
+.logo {
+  display: block;
+  margin: 20px auto; 
+  margin-top: 80px; 
+  max-width: 120px;   
+  width: 180px;
+  height: auto; 
+  
 }
