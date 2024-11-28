@@ -11,16 +11,16 @@ class DentalView(QWebEngineView):
         super().__init__()
         self.paciente_id = paciente_id
 
-        # Configuración del canal web para comunicación entre Python y JavaScript
+        
         self.channel = QWebChannel()
-        self.channel.registerObject("backend", self)  # Expone esta clase a JavaScript
+        self.channel.registerObject("backend", self)  
         self.page().setWebChannel(self.channel)
 
         # Carga la interfaz HTML
-        file_path = "D:/CRISTIAN/PRUEBA/dental_view.html"  # Ajusta la ruta si es necesario
+        file_path = "D:/CRISTIAN/PRUEBA/dental_view.html"  
         self.load(QUrl(f"file:///{file_path}"))
 
-    @pyqtSlot()  # Marca este método para ser accesible desde JavaScript
+    @pyqtSlot()  
     def cargar_datos_dentales(self):
         """Carga datos desde la base de datos para inicializar los dientes."""
         try:
@@ -38,7 +38,7 @@ class DentalView(QWebEngineView):
             print(f"Error al cargar datos dentales: {e}")
             return []
 
-    @pyqtSlot()  # Marca este método para ser accesible desde JavaScript
+    @pyqtSlot()  
     def guardar_datos_dentales(self, datos):
         """Guarda los datos enviados desde JavaScript en la base de datos."""
         try:
