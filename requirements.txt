@@ -1,0 +1,4 @@
+PyQt5==5.15.9
+PyQtWebEngine==5.15.7
+mysql-connector-python==8.0.33
+firebirdsql==1.3.2
