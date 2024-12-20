@@ -9,11 +9,13 @@
     <!-- Enlazamos el archivo CSS -->
   </head>
   <body>
-    <h1>Ficha Dental</h1>
-    <!-- Contenedor para los dientes superiores e inferiores -->
     <div id="dientes-superiores">
-      <div class="fila" id="superior-label">Superior</div>
-      <!-- Etiqueta de superior -->
+      <script>
+        const dientesSuperiores = [18, 17, 16, 15, 14, 13, 12, 11]; // Escala definida
+        dientesSuperiores.forEach((numero) => {
+          document.write(`<div class="diente">${numero}</div>`);
+        });
+      </script>
     </div>
 
     <div id="dientes-inferiores">

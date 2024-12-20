@@ -8,6 +8,7 @@ new QWebChannel(qt.webChannelTransport, function (channel) {
   backend
     .cargar_datos_dentales()
     .then(function (datos) {
+      console.log("Datos recibidos:", datos);
       inicializarDientes(datos);
     })
     .catch(function (error) {
@@ -19,16 +20,23 @@ function inicializarDientes(datos) {
   const superior = document.getElementById("dientes-superiores");
   const inferior = document.getElementById("dientes-inferiores");
 
-  for (let i = 1; i <= 16; i++) {
-    superior.appendChild(crearDiente(`Superior ${i}`));
-    inferior.appendChild(crearDiente(`Inferior ${i}`));
-  }
+  // Asignar los números de los dientes
+  const dientesSuperiores = [18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28];
+  const dientesInferiores = [48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38];
 
-  // Marcar lados y centro según los datos de la base de datos
+  // Agregar los dientes superiores
+  dientesSuperiores.forEach((numero) => {
+    superior.appendChild(crearDiente(numero));
+  });
+
+  // Agregar los dientes inferiores
+  dientesInferiores.forEach((numero) => {
+    inferior.appendChild(crearDiente(numero));
+  });
+
+  // Marcar los dientes según los datos de la base de datos
   datos.forEach(([diente, cara, estado]) => {
-    const dienteElemento = document.querySelector(
-      `[data-nombre="${diente}"]`
-    );
+    const dienteElemento = document.querySelector(`[data-nombre="${diente}"]`);
     if (dienteElemento) {
       const lado = dienteElemento.querySelector(`[data-cara="${cara}"]`);
       if (lado) {
@@ -47,6 +55,7 @@ function inicializarDientes(datos) {
     }
   });
 }
+
 
 function crearDiente(nombre) {
   const diente = document.createElement("div");
@@ -116,14 +125,14 @@ function crearLado(cara, diente) {
 function guardarCambios() {
   const datos = [];
   document.querySelectorAll(".lado.seleccionado").forEach((lado) => {
-    const nombreDiente = lado.closest(".diente").dataset.nombre;
+    const nombreDiente = lado.closest(".diente").dataset.nombre; // Este debería ser un número
     const cara = lado.dataset.cara;
     datos.push([nombreDiente, cara, "caries"]);
   });
 
   // Guardar el estado del centro
   document.querySelectorAll(".centro.seleccionado").forEach((centro) => {
-    const nombreDiente = centro.closest(".diente").dataset.nombre;
+    const nombreDiente = centro.closest(".diente").dataset.nombre; // Este también debería ser un número
     datos.push([nombreDiente, "centro", "caries"]);
   });
 
@@ -137,3 +146,15 @@ function guardarCambios() {
       console.error("Error al guardar los datos", error);
     });
 }
+// Función para obtener el ID del diente a partir del nombrefunction obtenerIdDiente(nombreDiente) {
+function obtenerIdDiente(nombreDiente) {
+    const regex = /\d+/; // Expresión regular para extraer los números
+    const match = nombreDiente.match(regex); // Extrae los números del nombre del diente
+    if (match) {
+      return match[0].padStart(2, '0'); // Asegura que tenga 2 caracteres
+    }
+    return "00"; // Retorna "00" si no encuentra un número
+  }
+
+
+
